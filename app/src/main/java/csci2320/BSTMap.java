@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.w3c.dom.Node;
+
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
   // Put your Node class and private data up here.
 
@@ -46,6 +48,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
   public Iterator<KeyValuePair<K, V>> iterator() {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+
+    // Note that if you choose to put a parent in your node, you can use the pseudocode
+    // in the book for this. If you don't, you are allowed to use a java.util.Stack. Both
+    // approaches will need to be named so they can have a constructor that either moves
+    // the Node pointer to the first value or populates the stack.
   }
 
   @Override
@@ -141,4 +148,56 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'apply'");
   }
+
+  // ----------------------------These are potential helper functions for debugging ---------------------
+  // You can modify these if you want. I don't call them in any way. They don't have to be used if you 
+  // don't need them. I used them in debugging my own implementation.
+
+  // public void inorderPrint() {
+  //   inorderPrintRecur(root);
+  // }
+
+  // private void inorderPrintRecur(Node<K, V> n) {
+  //   if (n != null) {
+  //     inorderPrintRecur(n.left);
+  //     System.out.println(n.key+" -> "+n.value+"  ");
+  //     inorderPrintRecur(n.right);
+  //   }
+  // }
+
+  // public void preorderPrintKeys() {
+  //   preorderPrintKeysRecur(root);
+  //   System.out.println();
+  // }
+
+  // public void preorderPrintKeysRecur(Node<K, V> n) {
+  //   if (n != null) {
+  //     System.out.print("(" + n.key);
+  //     preorderPrintKeysRecur(n.left);
+  //     preorderPrintKeysRecur(n.right);
+  //     System.out.print(")");
+  //   }
+  // }
+
+  // public boolean isConsistent() {
+  //   return isConsistentRecur(root);
+  // }
+
+  // private boolean isConsistentRecur(Node<K, V> n) {
+  //   if (n == null) return true;
+  //   if (n.parent != null && n.parent.left != n && n.parent.right != n) {
+  //     System.out.println("Not a child of parent at "+n.key);
+  //     return false;
+  //   }
+  //   if (n.left != null && n.left.key.compareTo(n.key) >= 0) {
+  //     System.out.println("Left child not smaller at "+n.key);
+  //     return false;
+  //   }
+  //   if (n.right != null && n.right.key.compareTo(n.key) <= 0) {
+  //     System.out.println("Right child not larger at "+n.key);
+  //     return false;
+  //   }
+  //   return isConsistentRecur(n.left) && isConsistentRecur(n.right);
+  // }
+
 }
