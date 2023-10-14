@@ -5,8 +5,6 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.w3c.dom.Node;
-
 public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
   // Put your Node class and private data up here.
 
