@@ -12,43 +12,49 @@ public class App {
     public static final int KEY_LEN = 8;
     public static void main(String[] args) {
         try (Scanner sc = new Scanner(System.in)) {
-            Random rand = new Random(sc.nextLong());
-            Map<String, Integer> map = buildMap(sc.nextInt(), rand);
-            printMapSums(map);
             String testType = sc.next();
+            if (testType.equals("speed")) {
+                speed(100000);
+                return;
+            }
+            Random rand = new Random(sc.nextLong());
+            Map<String, Integer> map1 = buildMap(sc.nextInt(), rand);
+            Map<String, Integer> map2 = buildMap(sc.nextInt(), rand);
+            printMapSums(map1);
+            printMapSums(map2);
+            
             switch (testType) {
-                case "pg":
-                    testPutGet(map, rand);
-                    break;
-                case "remove":
-                    testRemove(map, rand);
-                    break;
-                case "goe":
-                    testGetOrElse(map, rand);
+                case "basic":
+                    testPutGet(map1, rand);
+                    testPutGet(map2, rand);
+                    testGetOrElse(map1, rand);
+                    testGetOrElse(map2, rand);
+                    testRemove(map1, rand);
+                    testRemove(map2, rand);
                     break;
                 case "keyset":
-                    testKeySet(map, rand);
+                    testKeySet(map1, rand);
+                    testKeySet(map2, rand);
                     break;
-                case "map":
-                    map = testMapValues(map, rand);
-                    break;
-                case "filter":
-                    map = testFilter(map, rand);
-                    break;
-                case "find":
-                    testFind(map, rand);
-                    break;
-                case "fold":
-                    testFold(map, rand);
-                    break;
-                case "exists":
-                    testExists(map, rand);
-                    break;
-                case "forall":
-                    testForall(map, rand);
+                case "higher-order":
+                    testFind(map1, rand);
+                    testFind(map2, rand);
+                    testFold(map1, rand);
+                    testFold(map2, rand);
+                    testExists(map1, rand);
+                    testExists(map2, rand);
+                    testForall(map1, rand);
+                    testForall(map2, rand);
+                    map1 = testMapValues(map1, rand);
+                    var map3 = testMapValues(map2, rand);
+                    var map4 = testFilter(map1, rand);
+                    map2 = testFilter(map2, rand);
+                    printMapSums(map3);
+                    printMapSums(map4);
                     break;
             }
-            printMapSums(map);
+            printMapSums(map1);
+            printMapSums(map2);
         }
     }
 
@@ -283,5 +289,26 @@ public class App {
                 System.out.println("All keys matched single value.");
             }
         }
+    }
+
+    static void speed(int size) {
+        var start = System.nanoTime();
+        Random rand = new Random(48283);
+
+        var map = App.buildMap(size, rand);
+        testPutGet(map, rand);
+        testRemove(map, rand);
+        testGetOrElse(map, rand);
+        System.out.println("Basics: " + (System.nanoTime() - start)*1e-9);
+        testKeySet(map, rand);
+        var map2 = testMapValues(map, rand);
+        var map3 = testFilter(map, rand);
+        testFind(map, rand);
+        testFold(map, rand);
+        testExists(map, rand);
+        testForall(map, rand);
+        printMapSums(map2);
+        printMapSums(map3);
+        System.out.println("Final time: " + (System.nanoTime() - start)*1e-9);
     }
 }

@@ -8,7 +8,7 @@ import java.util.function.Function;
  * This is the Map interface that you will implement for a few assignments in this
  * course.
  */
-public interface Map<K, V> extends Iterable<Map.KeyValuePair<K, V>>, Function<K, V> {
+public interface Map<K, V> extends Iterable<Map.KeyValuePair<K, V>> {
   /**
    * This record type is included for the iterator so that you can iterator through
    * keys and values at the same time. It is also used as an argument for the higher-order

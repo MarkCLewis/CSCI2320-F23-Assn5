@@ -135,17 +135,6 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
     throw new UnsupportedOperationException("Unimplemented method 'forall'");
   }
 
-  /**
-   * Lets this object work as a function from K to V. Gets the value if the key exists.
-   * Throws an exception if it doesn't.
-   * @param key the key to look up in the collection
-   * @return the associated value
-   */
-  @Override
-  public V apply(K key) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'apply'");
-  }
 
   // ----------------------------These are potential helper functions for debugging ---------------------
   // You can modify these if you want. I don't call them in any way. They don't have to be used if you 
